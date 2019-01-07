@@ -1,0 +1,13 @@
+200 : Invalid Email Format
+201 : Email ID not present in database. (Unregistered user)
+202 : Email ID present in database. (Registered User)
+203 : Invalid First Name
+204 : Invalid Last Name
+211 : Password verification successful
+212 : Password verification failure
+213 : User input Field contains spaces
+251 : The 2 Passwords entered for registration do not match
+
+300 : Exception Occured
+301 : Database performed required action
+302 : Database operation did not happen as expected

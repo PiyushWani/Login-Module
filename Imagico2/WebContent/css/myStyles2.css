@@ -1,0 +1,73 @@
+
+.extra_padding
+{
+	
+	padding-top: 50px;
+}
+
+.registration_form
+{
+	background-color:#f1f1f1; 
+	border-radius: 5%;
+	margin-top:  3.5%;	
+	margin-left: 25%;
+	height: 650px;
+	width: 800px;
+}
+form
+{
+	background-color:#f1f1f1; 
+	border-radius: 5%;
+	margin-top:  10%;	
+	margin-left: 25%;
+	height: 500px;
+	width: 800px;
+}
+body{background-color:white}
+.container
+{	
+	padding-bottom:10px;
+	text-align:center;		
+	marging-bottom:5%;
+}
+.header
+{
+	text-align:center;		
+	margin: 10px 0px 12px 20px;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+.footprint
+{
+	text-align: right;
+	margin-top:0.5%;
+	margin-right:380px;
+}
+.submit_button {
+  background-color: green;
+  color: white;
+  padding: 14px 20px;
+  margin: 0px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+}
+.small_button
+{
+  background-color: white;
+  color: black;
+  padding: 1px 1px;
+  margin-left : 0px;
+  border: 1em;
+  cursor: pointer;
+  width: 5%;
+}
+input[type=email],input[type=password], input[type=text]
+{
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}

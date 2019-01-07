@@ -1,0 +1,83 @@
+DROP TABLE user_info_table;
+DROP TABLE password_table;
+
+CREATE TABLE password_table
+(
+  emailid varchar(50) NOT NULL,
+  password raw(128) NOT NULL,
+  salt raw(128) NOT NULL,
+  PRIMARY KEY(emailid)
+);
+
+
+CREATE TABLE user_info_table
+( 
+  emailid varchar(50) NOT NULL,
+  firstname varchar(50) NOT NULL,
+  lastname varchar(50) NOT NULL,
+  PRIMARY KEY(emailid),
+  FOREIGN KEY(emailid) REFERENCES password_table(emailid)
+);
+
+commit;
+
+CREATE OR REPLACE PROCEDURE emailIdCheck(email_Id IN VARCHAR2, counts OUT NUMBER)
+ IS
+ BEGIN
+ SELECT COUNT(*) INTO counts from user_info_table where emailId=emaild_Id;
+ END;
+ /
+ 
+ 
+ CREATE OR REPLACE PROCEDURE insertCustomerEntry(email_id VARCHAR2, first_name VARCHAR2,
+ last_name varchar2, password varchar2, hash varchar2, status OUT INTEGER)
+ IS
+ BEGIN
+ INSERT INTO password_table VALUES(email_id, password, hash);
+ INSERT INTO user_info_table VALUES(email_id, first_name, last_name);
+ COMMIT;
+ status:=1;
+ END;
+ /
+  
+  CREATE OR REPLACE PROCEDURE verifyPassword(email_id VARCHAR2, passwordin RAW, first_name OUT varchar2, last_name OUT varchar2, verify OUT INTEGER)
+  IS
+  number_records  NUMBER;
+  user_record user_info_table%rowtype;
+  BEGIN
+  
+  SELECT U.* INTO user_record FROM user_info_table U INNER JOIN password_table P ON U.emailid = P.emailid WHERE U.emailid=email_id AND P.password=passwordin;
+  verify := sql%rowcount;
+  IF verify = 1 THEN
+  	first_name := user_record.firstname;
+  	last_name  := user_record.lastname;
+  ELSE 
+  	verify:=0;
+  END IF;
+  
+  EXCEPTION
+  WHEN no_data_found THEN
+  	verify:= 0;
+  WHEN others THEN
+  	verify:=-1;
+  END;
+  /
+  
+  
+  CREATE OR REPLACE PROCEDURE fetchSalt(email_id IN VARCHAR2, status OUT NUMBER, salt_out OUT RAW)
+  IS
+  BEGIN
+  SELECT salt INTO salt_out FROM PASSWORD_TABLE WHERE emailid = email_id;
+  IF(sql%rowcount = 1) THEN
+  	status:=1;
+  ELSE
+  	status:=-1;
+  END IF;
+  EXCEPTION
+  	WHEN no_data_found THEN
+  		status:=0;
+  	WHEN others THEN
+  		status:=-2;
+  END;	
+  /
+  
