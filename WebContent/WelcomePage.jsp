@@ -33,9 +33,9 @@
 					<button class="small_button" type=button >Terms</button> 
 				</div>
 				<div class="col col-sm-2">
+					hi! How are you Doing?
 				</div>
 			</div>
-		
 	</div>
 </form>
 </body>
